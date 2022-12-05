@@ -1,0 +1,110 @@
+﻿@model Library.UI.WEB.Models.FullNewsPaper
+@using Library.Entities
+
+@{
+    ViewData["Title"] = "NewsPaper";
+}
+
+<h1>NewsPaper</h1>
+<hr />
+
+<div>
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.newsPaper.Title)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.newsPaper.Title)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.newsPaper.PublicationPlace)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.newsPaper.PublicationPlace)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.newsPaper.PublicationHouse)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.newsPaper.PublicationHouse)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.newsPaper.PublicationYear)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.newsPaper.PublicationYear)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.newsPaper.CountPages)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.newsPaper.CountPages)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.newsPaper.Description)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.newsPaper.Description)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.newsPaper.Number)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.newsPaper.Number)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.newsPaper.Date)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.newsPaper.Date)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.newsPaper.ISSN)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.newsPaper.ISSN)
+        </dd>
+    </dl>
+
+</div>
+
+<h1>Other issues</h1>
+<hr />
+
+<div>
+    @foreach (var item in Model.listNewsPapers)
+    {
+        <dl class="row">
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(itm => item.Date)
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(itm => item.Date)
+            </dd>
+            <dt class="col-sm-2">
+                @Html.DisplayNameFor(itm => item.Number)
+            </dt>
+            <dd class="col-sm-10">
+                @{
+                    NewsPaper newsPaper = (@NewsPaper)item;
+                    if (Model.newsPaper.Title == item.Title && Model.newsPaper.PublicationHouse == item.PublicationHouse &&
+                        Model.newsPaper.Date == item.Date)
+                    {
+                        @Html.DisplayFor(itm => item.Number)
+                    }
+                    else
+                    {
+                        @Html.ActionLink(item.Number.ToString(), "NewsPaper", "NewsPaper",
+                            new { id = newsPaper.EditionId, title = newsPaper.Title, publisher = newsPaper.PublicationHouse })
+                    }
+                }
+            </dd>
+        </dl>
+        <hr />
+    }
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "Edition")
+</div>

@@ -1,0 +1,91 @@
+﻿@model Library.Entities.NewsPaper
+
+@{
+    ViewData["Title"] = "NewsPaperEdit";
+}
+
+<h1>Edit newspaper</h1>
+<hr />
+
+<div class="row">
+
+    <div class="col-md-4">
+
+        <form asp-action="NewsPaperEdit">
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" name="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PublicationPlace" class="control-label"></label>
+                <input asp-for="PublicationPlace" name="PublicationPlace" class="form-control" />
+                <span asp-validation-for="PublicationPlace" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PublicationHouse" class="control-label"></label>
+                <input asp-for="PublicationHouse" name="PublicationHouse" class="form-control" />
+                <span asp-validation-for="PublicationHouse" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PublicationYear" class="control-label"></label>
+                <input asp-for="PublicationYear" name="PublicationYear" class="form-control" />
+                <span asp-validation-for="PublicationYear" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CountPages" class="control-label"></label>
+                <input asp-for="CountPages" name="CountPages" class="form-control" />
+                <span asp-validation-for="CountPages" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" name="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Number" class="control-label"></label>
+                <input asp-for="Number" name="Number" class="form-control" />
+                <span asp-validation-for="Number" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Date" class="control-label"></label>
+                <input asp-for="Date" name="Date" class="form-control" />
+                <span asp-validation-for="Date" class="text-danger"></span>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="ISSN" class="control-label"></label>
+                <input asp-for="ISSN" name="ISSN" class="form-control" />
+                <span asp-validation-for="ISSN" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "Edition")
+</div>
+
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

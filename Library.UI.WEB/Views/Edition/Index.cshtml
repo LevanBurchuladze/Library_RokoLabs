@@ -1,0 +1,161 @@
+﻿@model IEnumerable<Library.Entities.Edition>
+@using Library.Entities
+
+@{
+    ViewData["Title"] = "Catalog";
+
+    Pager pager = new Pager();
+
+    int pageNo = 0;
+
+    if(ViewBag.Pager != null)
+    {
+        pager = ViewBag.Pager;
+        pageNo = pager.CurrentPage;
+    }
+}
+
+<nav>
+    <ul>
+        <li><a href="">Main</a></li>
+        <li>
+            <a href="#">Product</a>
+            <ul>
+                <li>@Html.ActionLink("Add Book", "BookAdd", "Book")</li>
+                <li>@Html.ActionLink("Add NewsPaper", "NewsPaperAdd", "NewsPaper")</li>
+                <li>@Html.ActionLink("Add patent", "PatentAdd", "Patent")</li>
+            </ul>
+        </li>
+        <li>@Html.ActionLink("List Users", "UserList", "User")</li>
+        <li>@Html.ActionLink("Login", "Login", "Account")</li>
+    </ul>
+</nav>
+
+<div>
+    <h1>Catalog of Editions</h1>
+</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Identifier
+            </th>
+            <th>
+                Count pages
+            </th>
+            <th>
+                Edit
+            </th>
+            <th>
+                Delete
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            switch (item.Type)
+            {
+                case 1:
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.GetTitle(), "Book", "Book", new { id = item.EditionId })
+                        </td>
+                        <td>
+                            @item.GetIdentifier()
+                        </td>
+                        <td>
+                            @item.CountPages
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "BookEdit", "Book", new { editionId = item.EditionId })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "BookDelete", "Book", new { editionId = item.EditionId })
+                        </td>
+                    </tr>
+                    break;
+                case 2:
+                    <tr>
+                        <td>
+                            @{NewsPaper newsPaper = (@NewsPaper)item; }
+                            @Html.ActionLink(item.GetTitle(), "NewsPaper", "NewsPaper", new { id = newsPaper.EditionId, title = newsPaper.Title, publisher = newsPaper.PublicationHouse })
+                        </td>
+                        <td>
+                            @item.GetIdentifier()
+                        </td>
+                        <td>
+                            @item.CountPages
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "NewsPaperEdit", "NewsPaper", new { editionId = newsPaper.EditionId })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "NewsPaperDelete", "NewsPaper", new { editionId = newsPaper.EditionId })
+                        </td>
+                    </tr>
+                    break;
+                case 3:
+                    <tr>
+                        <td>
+                            @Html.ActionLink(item.GetTitle(), "Patent", "Patent", new { id = item.EditionId })
+                        </td>
+                        <td>
+                            @item.GetIdentifier()
+                        </td>
+                        <td>
+                            @item.CountPages
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "PatentEdit", "Patent", new { editionId = item.EditionId })
+                        </td>
+                        <td>
+                            @Html.ActionLink("Delete", "PatentDelete", "Patent", new { editionId = item.EditionId })
+                        </td>
+                    </tr>
+                    break;
+                default:
+                    break;
+            }
+        }
+    </tbody>
+</table>
+
+<div class="container">
+    @if (pager.TotalPages > 0)
+    {
+        <ul class="pagination justify-content-end">
+
+            @if (pager.CurrentPage > 1)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Edition" asp-action="Index" asp-route-pg="1">First</a>
+                </li>
+                <li>
+                    <a class="page-link" asp-controller="Edition" asp-action="Index" asp-route-pg="@(pager.CurrentPage - 1)">Previous</a>
+                </li>
+            }
+
+            @for (var pge = pager.StartPage; pge <= pager.EndPage; pge++)
+            {
+                <li class="page-item @(pge == pager.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-controller="Edition" asp-action="Index" asp-route-pg="@pge">@pge</a>
+                </li>
+            }
+
+            @if (pager.CurrentPage < pager.TotalPages)
+            {
+                <li class="page-item">
+                    <a class="page-link" asp-controller="Edition" asp-action="Index" asp-route-pg="@(pager.CurrentPage + 1)">Next</a>
+                </li>
+                <li>
+                    <a class="page-link" asp-controller="Edition" asp-action="Index" asp-route-pg="@(pager.TotalPages)">Last</a>
+                </li>
+            }
+        </ul> 
+    }
+
+</div>

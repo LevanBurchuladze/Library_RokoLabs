@@ -1,0 +1,74 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* задаем цвет фона для контейнера nav. */
+nav {
+    min-height: 50px;
+    margin: 10px 0;
+    background: rgba(132,60,227,0.7);
+    border-radius: 10px;
+    border: 3px solid #592899;
+    box-shadow: 5px 5px 5px #592899;
+    display: flex;
+    align-items: center;
+}
+
+/* убираем отступы и поля, а также list-style для "ul", и добавляем "position:relative" */
+nav ul {
+    padding-left: 15px;
+    list-style: none;
+    position: relative;
+}
+
+/* применяем inline-block позиционирование к элементам навигации */
+nav ul li {
+    display: inline-block;
+    background: rgba(132,60,227,0.);
+    margin: 0px 5px 0px 5px;
+    height: 100%;
+}
+
+/* стилизуем ссылки */
+nav a {
+    display: block;
+    padding: 0px;
+    color: #FFF;
+    font-size: 20px;
+    text-decoration: none;
+    background: rgba(132,60,227,0);
+}
+
+/* изменяем цвет фона при наведении курсора */
+nav a:hover {
+    background: rgba(132,60,227,0.7);   
+}
+
+nav ul ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+}
+
+/* отображаем выпадающий список при наведении */
+nav ul li:hover > ul {
+    display: inherit;
+}
+
+.left-nav-bar {
+    width: 60%;
+    display: inline;
+}
+
+.right-nav-bar {
+    width: 40%;
+    display: inline;
+    float: right;
+}
+
+.right-nav-bar li {
+    display: inline;
+    float: right;
+}

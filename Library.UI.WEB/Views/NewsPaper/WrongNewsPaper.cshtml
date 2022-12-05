@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewData["Title"] = "WrongNewsPaper";
+}
+
+<h1>WrongNewsPaper</h1>
+<h2>Please repeat to input NewsPaper</h2>
+
+@if (ViewBag.TypeWrong != null){
+    <h3>@ViewBag.TypeWrong</h3>
+}
+
+<hr />  
+
+<div>
+    @Html.ActionLink("Back to NewsPaperAdd", "NewsPaperAdd", "NewsPaper") |
+    @Html.ActionLink("Back to List", "Index", "Edition")
+</div>

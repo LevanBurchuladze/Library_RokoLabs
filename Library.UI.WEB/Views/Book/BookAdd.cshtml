@@ -1,0 +1,99 @@
+﻿@model Library.Entities.Book
+
+@{
+    ViewData["Title"] = "BookAdd";
+}
+
+<h1>BookAdd</h1>
+<hr />
+
+<div class="row">
+
+    <div class="col-md-4">
+
+        <form id="Add" asp-action="BookAdd">
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" name="Title" placeholder="Капитанская дочка" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <label class="control-label">Authors</label>
+            <div class="form-group">
+                <div class="multi_select_box">
+                    <select name="selAuthors" id="GetAuthors" class="multi_select w-100" title="Authors" multiple data-size="5" data-live-search="true" data-selected-text-format="count" data-count-selected-text="Authors ({0} items selected)">
+                        @{ foreach (var item in ViewBag.Authors)
+                            {
+                                <option value="@item.AuthorId @item.FirstName @item.SecondName">@item.FirstName @item.SecondName</option>
+ }
+                        }
+                    </select>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <label asp-for="PublicationPlace" class="control-label"></label>
+                <input asp-for="PublicationPlace" class="form-control" name="PublicationPlace" placeholder="Москва" />
+                <span asp-validation-for="PublicationPlace" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PublicationHouse" class="control-label"></label>
+                <input asp-for="PublicationHouse" class="form-control" value="@ViewBag.PublicationHouse" name="PublicationHouse" placeholder="Аванта" />
+                <span asp-validation-for="PublicationHouse" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PublicationYear" class="control-label"></label>
+                <input asp-for="PublicationYear" class="form-control" name="PublicationYear" placeholder="@DateTime.Now.Year" />
+                <span asp-validation-for="PublicationYear" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CountPages" class="control-label"></label>
+                <input asp-for="CountPages" class="form-control" name="CountPages" placeholder="150" />
+                <span asp-validation-for="CountPages" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" name="Description" placeholder="Последняя прозаическая работа Пушкина — история любви и спасения на фоне беспощадного бунта." />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ISBN" class="control-label"></label>
+                <input asp-for="ISBN" class="form-control" name="ISBN" placeholder="ISBN 0-12345-678-9" />
+                <span asp-validation-for="ISBN" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <input id="hidden-input" type="hidden" asp-for="Authors" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input asp-controller="Book" asp-action="BookAdd" id="AddProduct" type="submit" value="Add Book" class="btn btn-primary" />
+            </div>
+
+        </form>
+
+        <form method="post">
+            <label class="control-label">New Author</label>
+            <input title="Разрешено использовать только русские или английские буквы с большой буквы" pattern="((([A-Z])([a-z])*\s)?([A-Z])([a-z])*(-([A-Z]))?([a-z])*)|((([А-Я])([а-я])*\s)?([А-Я])([а-я])*(-([А-Я]))?([а-я])*)" required minlength="1" maxlength="50" class="form-control" id="author-fir-name" name="firName" placeholder="Александр" />
+            <input title="Разрешено использовать только русские или английские буквы с большой буквы" pattern="((([A-Z])([a-z])*\s)?([A-Z])([a-z])*(-([A-Z]))?([a-z])*)|((([А-Я])([а-я])*\s)?([А-Я])([а-я])*(-([А-Я]))?([а-я])*)" required minlength="1" maxlength="50" class="form-control" id="author-sec-name" name="secName" placeholder="Пушкин"/>
+            <input asp-controller="Book" asp-action="AuthorAdd" type="submit" id="author-add" value="Add Author" class="btn btn-primary" />
+        </form>
+
+    </div>
+
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "Edition")
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

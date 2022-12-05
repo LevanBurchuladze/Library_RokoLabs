@@ -1,0 +1,109 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: cursive;
+}
+
+html {
+    background-color: #d4cbff;
+}
+
+#root{
+    display: flex;
+    justify-content: center;
+}
+
+.App{
+    width: 800px;
+}
+
+.post{
+    display: flex;
+    padding: 15px;
+    border: 2px solid #592899;
+    margin-top: 15px;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 15px;
+    background: rgba(132,60,227,0.7);
+    box-shadow: 5px 5px 5px #592899;
+    color:black;
+    font-size: 18px;
+}
+
+.post label {
+    color: white;
+}
+
+.post_btns_button {
+    margin-left: 5px;
+    background-color: #9115ad; /* Green */
+    border: none;
+    color: white;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 7px;
+    min-width: 50px;
+    box-shadow: 4px 4px 4px #592899;
+}
+
+.post_btns_button :hover {
+    background-color: #4f1b93; /* Green */
+}
+
+.option {
+    background-color: #592899;
+    color: lightgray;
+}
+
+.option:hover {
+    background-color: #4f1b93;
+    background: rgba(132,60,227,0.7);
+    color: white;
+}
+
+.chip {
+    font-size: 20px !important;
+    border-radius: 5px !important;
+    border-color: white !important;
+}
+
+.searchBox#search_input::placeholder {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 10px;
+    height: 30px;
+}
+
+.Selector {
+    border-radius: 5px;
+}
+
+.page__wrapper {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.page {
+    padding: 5px;
+    border: 1px solid #4f1b93;
+    cursor: pointer;
+    min-width: 35px;
+    text-align: center;
+    margin-right: 5px;
+    box-shadow: 4px 4px 4px #592899;
+    background-color: #9115ad;
+    color: white;
+}
+
+.page__current {
+    background-color: #4f1b93;
+    box-shadow: 4px 4px 4px #592899;
+    font-weight: bold;
+}

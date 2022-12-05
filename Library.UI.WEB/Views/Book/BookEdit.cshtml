@@ -1,0 +1,115 @@
+﻿@model Library.Entities.Book
+
+@{
+    ViewData["Title"] = "BookEdit";
+}
+
+<h1>Edit book</h1>
+<hr />
+
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="BookEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="form-group">
+                <label asp-for="Title" class="control-label"></label>
+                <input asp-for="Title" class="form-control" />
+                <span asp-validation-for="Title" class="text-danger"></span>
+            </div>
+
+            <label class="control-label">Authors</label>
+            <div class="form-group">
+                <div class="multi_select_box">
+                    <select name="selAuthors" id="GetAuthors" class="multi_select w-100" title="Authors" multiple data-size="5" data-live-search="true" data-selected-text-format="count" data-count-selected-text="Authors ({0} items selected)">
+                        @{ foreach (var item in ViewBag.Authors)
+                            {
+                                bool flag = false;
+                                foreach (var author in Model.Authors)
+                                {
+                                    if (item.AuthorId == author.AuthorId)
+                                    {
+                                        <option value="@item.AuthorId @item.FirstName @item.SecondName" selected>@item.FirstName @item.SecondName</option>
+                                        flag = true;
+                                        break;
+                                    }
+                                }
+                                if (!flag)
+                                {
+                                    <option value="@item.AuthorId @item.FirstName @item.SecondName">@item.FirstName @item.SecondName</option>
+                                }
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PublicationPlace" class="control-label"></label>
+                <input asp-for="PublicationPlace" class="form-control" />
+                <span asp-validation-for="PublicationPlace" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PublicationHouse" class="control-label"></label>
+                <input asp-for="PublicationHouse" class="form-control" />
+                <span asp-validation-for="PublicationHouse" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="PublicationYear" class="control-label"></label>
+                <input asp-for="PublicationYear" class="form-control" />
+                <span asp-validation-for="PublicationYear" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="CountPages" class="control-label"></label>
+                <input asp-for="CountPages" class="form-control" />
+                <span asp-validation-for="CountPages" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="Description" class="control-label"></label>
+                <input asp-for="Description" class="form-control" />
+                <span asp-validation-for="Description" class="text-danger"></span>
+            </div>
+
+            <div class="form-group">
+                <label asp-for="ISBN" class="control-label"></label>
+                <input asp-for="ISBN" class="form-control" />
+                <span asp-validation-for="ISBN" class="text-danger"></span>
+            </div>
+
+            <!--Hiden input-->
+            <div class="form-group">
+                <input type="hidden" readonly asp-for="EditionId" class="form-control" />
+                <span asp-validation-for="EditionId" class="text-danger"></span>
+            </div>
+
+            <!--Hiden input-->
+            <div class="form-group">
+                <input type="hidden" readonly asp-for="BookId" class="form-control" />
+                <span asp-validation-for="BookId" class="text-danger"></span>
+            </div>
+
+            <!--Hiden input-->
+            <div class="form-group">
+                <input id="hidden-input" type="hidden" asp-for="Authors" class="form-control" />
+            </div>
+
+            <div class="form-group">
+                <input type="hidden" value=@Model.EditionId>
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+
+        </form>
+    </div>
+</div>
+
+<div>
+    @Html.ActionLink("Back to List", "Index", "Edition")
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
